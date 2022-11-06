@@ -1,0 +1,32 @@
+Arguments: 
+  /root/.nvm/versions/node/v18.8.0/bin/node /root/.nvm/versions/node/v18.8.0/bin/yarn add -D typescript ts-node
+
+PATH: 
+  /root/.vscode-server/bin/8fa188b2b301d36553cbc9ce1b0a146ccb93351f/bin/remote-cli:/root/.nvm/versions/node/v18.8.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Python310/Scripts/:/mnt/c/Python310/:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files (x86)/dotnet/:/mnt/c/Users/capor/AppData/Roaming/nvm:/mnt/c/Program Files/nodejs:/mnt/c/Program Files/nodejs/:/mnt/c/xampp/php:/mnt/c/ProgramData/ComposerSetup/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/Users/capor/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/capor/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/capor/AppData/Roaming/nvm:/mnt/c/Users/capor/AppData/Roaming/npm:/mnt/c/Users/capor/AppData/Roaming/Composer/vendor/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  18.8.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: getaddrinfo EAI_AGAIN registry.yarnpkg.com
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:111:26)
+
+npm manifest: 
+  {
+    "name": "nestjs-prisma-pagination",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
