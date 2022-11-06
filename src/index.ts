@@ -30,7 +30,7 @@ export function handleDateRange(
     query.gte = new Date(new Date(from).setHours(0, 0, 0));
   }
   if (to) {
-    query.lte = new Date(new Date(to).setHours(23, 59, 0));
+    query.lte = new Date(new Date(to).setHours(23, 59, 59));
   }
   if (!from && !to) return {};
   return { [attr]: query };
