@@ -73,6 +73,7 @@ function dotStringToObject(
 function handle(options: string[], where: any, value: any) {
   if (options.length) {
     for (const field of options) {
+      if (isNaN(value)) continue;
       if (!field.includes('.')) {
         where.OR.push({ [field]: value });
         continue;
