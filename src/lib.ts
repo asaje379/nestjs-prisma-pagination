@@ -70,48 +70,34 @@ function dotStringToObject(
   };
 }
 
+function handle(options: string[], where: any, value: any) {
+  if (options.length) {
+    for (const field of options) {
+      if (!field.includes('.')) {
+        where.OR.push({ [field]: value });
+        continue;
+      }
+      const result = dotStringToObject(field, value);
+      if (Object.keys(result).length) {
+        where.OR.push(result);
+      }
+    }
+  }
+}
+
 function handleSearch(search?: string, options?: PaginationOptions) {
   let where: Record<string, any> = {};
+
   const searchQuery = { contains: search, mode: 'insensitive' };
   if (options?.enabled) {
     where.enabled = true;
   }
 
-  if (search && options?.search?.length) {
+  if (search) {
     where.OR = [];
-
-    for (const field of options.search) {
-      if (!field.includes('.')) {
-        where.OR.push({ [field]: searchQuery });
-        continue;
-      }
-      where.OR.push(dotStringToObject(field, searchQuery));
-    }
-  }
-
-  // Handle numbers and enums searching
-  if (options?.equals?.length) {
-    where.OR = [];
-
-    for (const field of options.equals) {
-      if (!field.includes('.')) {
-        where.OR.push({ [field]: Number(search) });
-        continue;
-      }
-      where.OR.push(dotStringToObject(field, Number(search)));
-    }
-  }
-
-  if (options?.enums?.length) {
-    where.OR = [];
-
-    for (const field of options.enums) {
-      if (!field.includes('.')) {
-        where.OR.push({ [field]: search });
-        continue;
-      }
-      where.OR.push(dotStringToObject(field, search));
-    }
+    handle(options?.search ?? [], where, searchQuery);
+    handle(options?.equals ?? [], where, searchQuery);
+    handle(options?.enums ?? [], where, searchQuery);
   }
 
   return where;
