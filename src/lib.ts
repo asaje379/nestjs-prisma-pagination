@@ -96,8 +96,8 @@ function handleSearch(search?: string, options?: PaginationOptions) {
   if (search) {
     where.OR = [];
     handle(options?.search ?? [], where, searchQuery);
-    handle(options?.equals ?? [], where, searchQuery);
-    handle(options?.enums ?? [], where, searchQuery);
+    handle(options?.equals ?? [], where, Number(search));
+    handle(options?.enums ?? [], where, search);
   }
 
   return where;
