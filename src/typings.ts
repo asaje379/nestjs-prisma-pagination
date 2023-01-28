@@ -12,6 +12,9 @@ export interface DateRangeArgs {
 }
 
 export interface PaginationOptions {
-  includes?: Record<string, boolean | any>;
+  includes?: string[];
   search?: string[];
+  equals?: string[];
+  orderBy?: Record<string, 'asc' | 'desc'>;
+  enabled?: boolean;
 }
