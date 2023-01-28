@@ -73,7 +73,7 @@ function dotStringToObject(
 function handle(options: string[], where: any, value: any) {
   if (options.length) {
     for (const field of options) {
-      if (isNaN(value)) continue;
+      if (!value) continue;
       if (!field.includes('.')) {
         where.OR.push({ [field]: value });
         continue;
@@ -97,7 +97,11 @@ function handleSearch(search?: string, options?: PaginationOptions) {
   if (search) {
     where.OR = [];
     handle(options?.search ?? [], where, searchQuery);
-    handle(options?.equals ?? [], where, Number(search));
+    handle(
+      options?.equals ?? [],
+      where,
+      !isNaN(+search) ? Number(search) : undefined,
+    );
     handle(options?.enums ?? [], where, search);
   }
 
