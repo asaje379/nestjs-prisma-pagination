@@ -37,8 +37,8 @@ function handleDateRange(
 }
 
 function handleIncludes(query: any, options?: PaginationOptions) {
-  const include: any = {};
   if (options && options.includes) {
+    const include: any = {};
     for (const field of options.includes) {
       if (!field.includes('.')) {
         include[field] = true;
@@ -46,8 +46,8 @@ function handleIncludes(query: any, options?: PaginationOptions) {
       }
       include[field] = dotStringToObject(field, null, true);
     }
+    query.include = include;
   }
-  query.include = include;
 }
 
 function dotStringToObject(
