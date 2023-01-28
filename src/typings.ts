@@ -15,6 +15,7 @@ export interface PaginationOptions {
   includes?: string[];
   search?: string[];
   equals?: string[];
+  enums?: string[];
   orderBy?: Record<string, 'asc' | 'desc'>;
   enabled?: boolean;
 }

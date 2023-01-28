@@ -95,6 +95,18 @@ function handleSearch(search?: string, options?: PaginationOptions) {
 
     for (const field of options.equals) {
       if (!field.includes('.')) {
+        where.OR.push({ [field]: Number(search) });
+        continue;
+      }
+      where.OR.push(dotStringToObject(field, Number(search)));
+    }
+  }
+
+  if (options?.enums?.length) {
+    where.OR = [];
+
+    for (const field of options.enums) {
+      if (!field.includes('.')) {
         where.OR.push({ [field]: search });
         continue;
       }
