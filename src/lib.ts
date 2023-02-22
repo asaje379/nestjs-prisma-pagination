@@ -9,13 +9,13 @@ export function paginate(args?: PaginationArgs, options?: PaginationOptions) {
   const where = handleSearch(search, options);
 
   const query: any = {
-    where: { ...where, ...handleDateRange(from, to) },
+    where: { ...where, ...handleDateRange(from, to, options?.dateAttr) },
     take: limit_ === -1 ? undefined : limit_,
     skip: limit_ === -1 ? 0 : (page_ - 1) * limit_,
     orderBy: options?.orderBy ?? { createdAt: 'desc' },
   };
 
-  handleIncludes(options, query);
+  handleIncludes(query, options);
 
   return query;
 }
@@ -38,13 +38,14 @@ function handleDateRange(
 
 function handleIncludes(query: any, options?: PaginationOptions) {
   if (options && options.includes) {
-    const include: any = {};
+    let include: any = {};
     for (const field of options.includes) {
       if (!field.includes('.')) {
         include[field] = true;
         continue;
       }
-      include[field] = dotStringToObject(field, null, true);
+
+      include = { ...include, ...dotStringToObject(field, null, true) };
     }
     query.include = include;
   }
@@ -55,9 +56,11 @@ function dotStringToObject(
   value: any,
   include: boolean = false,
 ): any {
-  if (dotStr.length === 0) return include ? { value: true } : value;
   const attrs = dotStr.split('.');
   const next = attrs.slice(1).join('.');
+
+  if (attrs.length === 1) return { [attrs[0]]: include ? true : value };
+
   return {
     [attrs[0]]: include
       ? {

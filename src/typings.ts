@@ -18,4 +18,5 @@ export interface PaginationOptions {
   enums?: string[];
   orderBy?: Record<string, 'asc' | 'desc'>;
   enabled?: boolean;
+  dateAttr?: string;
 }
