@@ -1,7 +1,7 @@
 import { PaginationArgs, PaginationOptions } from './typings';
 
 export function paginate(args?: PaginationArgs, options?: PaginationOptions) {
-  if (!args) return undefined;
+  if (!args) return { where: {} };
   const { page, limit, search, from, to } = args;
   const page_ = page ? Number(page) : 1;
   const limit_ = limit ? Number(limit) : 100;
