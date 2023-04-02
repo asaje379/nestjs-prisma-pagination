@@ -17,6 +17,8 @@ export function paginate(args?: PaginationArgs, options?: PaginationOptions) {
 
   handleIncludes(query, options);
 
+  if (Object.keys(query.include).length === 0) delete query.include;
+
   return query;
 }
 
