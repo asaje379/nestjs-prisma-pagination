@@ -13,7 +13,7 @@ describe('Pagination', () => {
       {
         dateAttr: 'at',
         enabled: false,
-        includes: ['post', 'user.agent.auth'],
+        includes: ['post', 'user.agent.auth', 'user.agent.info'],
         search: ['fullname', 'reference'],
         orderBy: { fullname: 'asc' },
       },

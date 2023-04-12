@@ -41,15 +41,16 @@ function handleDateRange(
 function handleIncludes(query: any, options?: PaginationOptions) {
   if (options && options.includes) {
     let include: any = {};
+    const objects = [];
     for (const field of options.includes) {
       if (!field.includes('.')) {
         include[field] = true;
         continue;
       }
 
-      include = { ...include, ...dotStringToObject(field, null, true) };
+      objects.push(dotStringToObject(field, null, true));
     }
-    query.include = include;
+    query.include = mergeObjects(...objects);
   }
 }
 
@@ -73,6 +74,40 @@ function dotStringToObject(
         }
       : dotStringToObject(next, value),
   };
+}
+
+function mergeTwoObjects(src1: Record<string, any>, src2: Record<string, any>) {
+  let result: Record<string, any> = {};
+
+  for (const key in src1) {
+    console.log(key);
+    if (!(key in src2)) {
+      result[key] = src1[key];
+      continue;
+    }
+    result[key] = mergeTwoObjects(src1[key], src2[key]);
+  }
+
+  for (const key in src2) {
+    console.log(key);
+    if (!(key in src1)) {
+      result[key] = src2[key];
+      continue;
+    }
+    result[key] = mergeTwoObjects(src1[key], src2[key]);
+  }
+
+  return result;
+}
+
+function mergeObjects(...srcs: Record<string, any>[]) {
+  if (srcs.length === 0) return null;
+  if (srcs.length === 1) return srcs[0];
+  let result = mergeTwoObjects(srcs[0], srcs[1]);
+  for (let i = 2; i < srcs.length; i++) {
+    result = mergeTwoObjects(result, srcs[i]);
+  }
+  return result;
 }
 
 function handle(options: string[], where: any, value: any) {
