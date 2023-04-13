@@ -51,7 +51,7 @@ function handleIncludes(query: any, options?: PaginationOptions) {
 
       objects.push(dotStringToObject(field, null, true));
     }
-    query.include = mergeObjects(...objects);
+    query.include = { ...include, ...mergeObjects(...objects) };
   }
 }
 
