@@ -39,7 +39,7 @@ function handleDateRange(
   return { [attr]: query };
 }
 
-function handleIncludes(query: any, options?: PaginationOptions) {
+export function handleIncludes(query: any, options?: PaginationOptions) {
   if (options && options.includes) {
     let include: any = {};
     const objects = [];
