@@ -53,6 +53,7 @@ export function handleIncludes(query: any, options?: PaginationOptions) {
     }
     query.include = { ...include, ...mergeObjects(...objects) };
   }
+  return query;
 }
 
 function dotStringToObject(
