@@ -105,6 +105,8 @@ interface PaginationArgs {
   search?: string; // The value you want to search in your table (string | number | enum)
   from?: string; // ISOString value that indicates the starting date for the query
   to?: string; // ISOString value that indicates the end date for the query
+  take?: number; // The number of items you want to retrieve
+  skip?: number; // The number of items to skip
 }
 ```
 
