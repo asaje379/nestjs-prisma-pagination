@@ -4,6 +4,8 @@ export interface PaginationArgs {
   search?: string;
   from?: string;
   to?: string;
+  take?: number;
+  skip?: number;
 }
 
 export interface DateRangeArgs {

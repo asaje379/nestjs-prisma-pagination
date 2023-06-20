@@ -2,7 +2,7 @@ import { PaginationArgs, PaginationOptions } from './typings';
 
 export function paginate(args?: PaginationArgs, options?: PaginationOptions) {
   if (!args) return { where: options?.enabled ? { enabled: true } : {} };
-  const { page, limit, search, from, to } = args;
+  const { page, limit, search, from, to, take, skip } = args;
   const page_ = page ? Number(page) : 1;
   const limit_ = limit ? Number(limit) : 100;
 
@@ -10,8 +10,8 @@ export function paginate(args?: PaginationArgs, options?: PaginationOptions) {
 
   const query: any = {
     where: { ...where, ...handleDateRange(from, to, options?.dateAttr) },
-    take: limit_ === -1 ? undefined : limit_,
-    skip: limit_ === -1 ? 0 : (page_ - 1) * limit_,
+    take: take ? take : limit_ === -1 ? undefined : limit_,
+    skip: skip ? skip : limit_ === -1 ? 0 : (page_ - 1) * limit_,
     orderBy: options?.orderBy ?? { createdAt: 'desc' },
   };
 
