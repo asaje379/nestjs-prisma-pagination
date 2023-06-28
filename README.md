@@ -121,5 +121,6 @@ interface PaginationOptions {
   orderBy?: Record<string, 'asc' | 'desc'>;
   enabled?: boolean;
   dateAttr?: string;
+  disableInsensitiveMode?: boolean; // When set to true, search queries are in sensitive mode
 }
 ```

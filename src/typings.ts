@@ -21,4 +21,5 @@ export interface PaginationOptions {
   orderBy?: Record<string, 'asc' | 'desc'>;
   enabled?: boolean;
   dateAttr?: string;
+  disableInsensitiveMode?: boolean;
 }

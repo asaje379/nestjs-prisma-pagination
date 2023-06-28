@@ -131,7 +131,10 @@ function handle(options: string[], where: any, value: any) {
 function handleSearch(search?: string, options?: PaginationOptions) {
   let where: Record<string, any> = {};
 
-  const searchQuery = { contains: search, mode: 'insensitive' };
+  const searchQuery = {
+    contains: search,
+    ...(options?.disableInsensitiveMode ? {} : { mode: 'insensitive' }),
+  };
   if (options?.enabled) {
     where.enabled = true;
   }
